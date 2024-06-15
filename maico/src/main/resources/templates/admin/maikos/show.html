@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<div th:replace="~{fragment :: meta}"></div>
+
+	
+	<link rel="stylesheet" type="text/css"
+		href="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-6/css/reset.css">
+	<link rel="stylesheet" type="text/css"
+		href="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-6/css/5-6.css">
+		<div th:replace="~{fragment :: styles}"></div>
+	<title>舞子詳細</title>
+</head>
+
+<body>
+	<div id="particles-js"></div>
+	<div id="wrapper">
+		<div class="maiko-wrapper">
+			<!-- ヘッダー -->
+			<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm maiko-navbar">
+				<div class="container maiko-container">
+					<a class="navbar-brand" th:href="@{/}">
+						<img class="maiko-logo me-1" th:src="@{/images/logo.png}" alt="MAIKO.COM">
+					</a>
+				</div>
+			</nav>
+
+			<main>
+				<div class="container pt-4 pb-5 maiko-container">
+					<div class="row justify-content-center">
+						<div class="col-xl-5 col-lg-6 col-md-8">
+							<nav class="mb-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+								<ol class="breadcrumb mb-0">
+									<li class="breadcrumb-item"><a th:href="@{/admin/maikos}">舞子一覧</a></li>
+									<li class="breadcrumb-item active" aria-current="page">舞子詳細</li>
+								</ol>
+							</nav>
+
+							<h1 class="mb-4 text-center" th:text="${maiko.getName()}"></h1>
+
+							<div class="d-flex justify-content-end align-items-end mb-3">
+								<div>
+									<a th:href="@{/admin/maikos/__${maiko.getId()}__/edit}">編集</a>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<img th:if="${maiko.getImageName()}" th:src="@{/storage/__${maiko.getImageName()}__}"
+									class="maiko_img" alt="民宿画像">
+								<img th:unless="${maiko.getImageName()}" th:src="@{/images/noImage.png}"
+									class="maiko_img" alt="NO IMAGE">
+							</div>
+
+							<div class="container mb-4">
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">ID</span>
+									</div>
+
+									<div class="col">
+										<span th:text="${maiko.getId()}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">名前</span>
+									</div>
+
+									<div class="col">
+										<span th:text="${maiko.getName()}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">特技</span>
+									</div>
+
+									<div class="col">
+										<span class="maiko-pre-wrap" th:text="${maiko.getDescription()}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">お花代</span>
+									</div>
+
+									<div class="col">
+										<span
+											th:text="${#numbers.formatInteger(maiko.getPrice(), 1, 'COMMA') + '円'}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">人数</span>
+									</div>
+
+									<div class="col">
+										<span th:text="${maiko.getCapacity() + '人'}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">郵便番号</span>
+									</div>
+
+									<div class="col">
+										<span th:text="${maiko.getPostalCode()}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">住所</span>
+									</div>
+
+									<div class="col">
+										<span th:text="${maiko.getAddress()}"></span>
+									</div>
+								</div>
+
+								<div class="row pb-2 mb-2 border-bottom">
+									<div class="col-4">
+										<span class="fw-bold">電話番号</span>
+									</div>
+
+									<div class="col">
+										<span th:text="${maiko.getPhoneNumber()}"></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!-- フッター -->
+			<div th:replace="~{fragment :: footer}"></div>
+		</div>
+		<!--/wrapper-->
+	</div>
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-6/js/5-6.js"></script>
+	<script th:src="@{/js/particles.js}"></script>
+</body>
+
+</html>

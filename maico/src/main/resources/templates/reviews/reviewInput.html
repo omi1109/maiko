@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>レビュー登録</title>
+    <!-- 必要なメタデータとスタイルシートをインクルード -->
+    <div th:replace="~{fragment :: meta}"></div>
+    <div th:replace="~{fragment :: styles}"></div>
+</head>
+<body>
+    <div class="maiko-wrapper">
+        <!-- ヘッダー -->
+        <div th:replace="~{fragment :: header}"></div>
+        <h1 class="mb-4 text-center" th:text="${maiko.name} + のレビュー投稿"></h1>
+        <form th:action="@{/maikos/reviews}" th:object="${reviewForm}" method="post" class="w-100">
+            <input type="hidden"  name="maiko" th:value="${maiko.id}"/>
+            <input type="hidden"  name="user" th:value="${user.id}"/>
+
+            <label for="rating">評価</label>
+            <select th:field="*{rating}">
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5">★★★★★</option>
+            </select>
+            <label for="userComment">コメント</label>
+            <textarea th:field="*{userComment}"></textarea>
+            <button type="submit">送信</button>
+        </form>
+        <!-- フッター -->
+        <div th:replace="~{fragment :: footer}"></div>
+    </div>
+    <div th:replace="~{fragment :: scripts}"></div>
+</body>
+</html>
